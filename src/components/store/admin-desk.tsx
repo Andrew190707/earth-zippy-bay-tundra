@@ -215,8 +215,8 @@ export function AdminDesk({ onSignOut }: { onSignOut: () => void }) {
     <>
       <div className="admin-shell">
         <aside className="admin-side">
-          <Link to="/" className="wordmark">
-            UV<span>®</span>
+          <Link to="/" className="wordmark" aria-label="UV home">
+            <img src="/uv-logo.png" alt="UV" className="brand-logo" />
           </Link>
           <span className="eyebrow">STORE DESK</span>
           <nav>

@@ -32,8 +32,8 @@ export function Header() {
         >
           <Menu size={19} />
         </button>
-        <Link to="/" className="wordmark" data-testid="link-home">
-          UV<span>®</span>
+        <Link to="/" className="wordmark" data-testid="link-home" aria-label="UV home">
+          <img src="/uv-logo.png" alt="UV" className="brand-logo" />
         </Link>
         <nav className={`main-nav ${menu ? "nav-open" : ""}`} aria-label="Main navigation">
           <Link to="/shop" search={{ category: undefined, q: undefined }} onClick={() => setMenu(false)}>
@@ -94,8 +94,8 @@ export function Footer() {
     <footer className="site-footer">
       <div className="footer-top">
         <div>
-          <Link to="/" className="wordmark footer-mark">
-            UV<span>®</span>
+          <Link to="/" className="wordmark footer-mark" aria-label="UV home">
+            <img src="/uv-logo.png" alt="UV" className="brand-logo" />
           </Link>
           <p>
             Considered clothing.

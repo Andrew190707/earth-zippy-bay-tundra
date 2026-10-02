@@ -45,8 +45,8 @@ function AdminPage() {
     return (
       <div className="admin-login-wrap">
         <div className="auth-card admin-login">
-          <Link to="/" className="wordmark">
-            UV<span>®</span>
+          <Link to="/" className="wordmark" aria-label="UV home">
+            <img src="/uv-logo.png" alt="UV" className="brand-logo" />
           </Link>
           <span className="eyebrow">RESTRICTED</span>
           <h1>Not this door.</h1>

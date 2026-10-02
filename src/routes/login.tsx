@@ -53,8 +53,8 @@ function Login() {
   return (
     <div className="admin-login-wrap">
       <form className="auth-card admin-login" onSubmit={submit}>
-        <Link to="/" className="wordmark">
-          UV<span>®</span>
+        <Link to="/" className="wordmark" aria-label="UV home">
+          <img src="/uv-logo.png" alt="UV" className="brand-logo" />
         </Link>
         <span className="eyebrow">{mode === "in" ? "WELCOME BACK" : "JOIN UV"}</span>
         <h1>{mode === "in" ? "Sign in." : "Create account."}</h1>

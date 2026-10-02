@@ -14,6 +14,15 @@ A production-ready men's clothing store:
 
 Products always come from the database. Prices are never trusted from the browser.
 
+## SIKKU catalogue
+
+The storefront is seeded with the 11 launch tees supplied for the SIKKU collection:
+
+- **Sikku Drop 01:** Hod Kolam Tee, Godzilla Kolam Tee, Spidey Kolam Tee, Kaali Kolam Tee, Wolf Kolam Tee, Skull Kolam Tee — ₹750 each.
+- **Sikku Drop 02:** Spidey Kolam Tee Ver 2, Spidey Kolam Tee Ver 3, Skull Ver 2, Snake Kolam Tee, Swan Kolam Tee — shown as **₹899 crossed out → ₹750**.
+- Product photography is currently supplied for **Spidey Kolam Tee Ver 2**. The other launch tees intentionally use the built-in product-image placeholder until their photography is added.
+- The initial inventory values in the SIKKU seed migration are **provisional (20 units per SKU)** and should be adjusted from the admin desk before launch.
+
 ## Local / preview
 
 The app starts on its own in this workspace. No extra setup is required to browse the catalogue, cart, and admin UI.

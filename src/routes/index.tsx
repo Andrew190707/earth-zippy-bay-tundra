@@ -35,8 +35,8 @@ function HomePage() {
         <section className="hero">
           <img
             className="hero-image"
-            src="/uv-editorial-hero.png"
-            alt="UV editorial campaign in a sculptural charcoal overshirt"
+            src="/products/sikku-02/spidey-ver2-01.jpg"
+            alt="UV Spidey Kolam Tee Ver 2 from Sikku Drop 02"
           />
           <div className="hero-shade" />
           <div className="hero-copy">
@@ -52,8 +52,8 @@ function HomePage() {
             </Link>
           </div>
           <div className="hero-index">
-            <span>01 / 03</span>
-            <span>THE FORM STUDY</span>
+            <span>01 / 02</span>
+            <span>SIKKU / SPIDEY VER 2</span>
           </div>
         </section>
         <section className="editorial-intro section-wrap">

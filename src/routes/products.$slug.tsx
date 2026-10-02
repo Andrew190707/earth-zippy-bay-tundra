@@ -124,8 +124,10 @@ function ProductPage() {
             </span>
             <h1>{p.name}</h1>
             <div className="detail-price">
-              {money(p.price)}
               {p.compareAtPrice && p.compareAtPrice > p.price && <del>{money(p.compareAtPrice)}</del>}
+              <span className={p.compareAtPrice && p.compareAtPrice > p.price ? "current-sale-price" : undefined}>
+                {money(p.price)}
+              </span>
             </div>
             <p className="detail-description">{p.description}</p>
             <div className="choice-group">

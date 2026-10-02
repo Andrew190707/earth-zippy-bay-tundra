@@ -102,7 +102,12 @@ export function ProductCard({ product }: { product: Product }) {
           <h3>{product.name}</h3>
           <p>{product.category}</p>
         </div>
-        <strong>{money(product.price)}</strong>
+        <strong className={product.compareAtPrice && product.compareAtPrice > product.price ? "product-sale-price" : undefined}>
+          {product.compareAtPrice && product.compareAtPrice > product.price && (
+            <del>{money(product.compareAtPrice)}</del>
+          )}
+          {money(product.price)}
+        </strong>
       </div>
     </Link>
   );
