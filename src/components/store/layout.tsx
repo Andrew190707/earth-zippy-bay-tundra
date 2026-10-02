@@ -1,20 +1,14 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, Search, ShoppingBag } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
 import { SignedIn, SignedOut, UserButton } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
-import { listCollections } from "@/lib/store/catalog";
 import { cartCount, useCart } from "@/lib/store/cart";
 
 export function Header() {
   const [menu, setMenu] = useState(false);
   const items = useCart((s) => s.items);
   const count = cartCount(items);
-  const collections = useQuery({
-    queryKey: ["collections"],
-    queryFn: () => listCollections(),
-  });
   const { isPending } = useCurrentUserState();
 
   return (
@@ -32,35 +26,36 @@ export function Header() {
         >
           <Menu size={19} />
         </button>
+
         <Link to="/" className="wordmark" data-testid="link-home" aria-label="UV home">
           <img src="/uv-logo.png" alt="UV" className="brand-logo" />
         </Link>
+
         <nav className={`main-nav ${menu ? "nav-open" : ""}`} aria-label="Main navigation">
-          <Link to="/shop" search={{ category: undefined, q: undefined }} onClick={() => setMenu(false)}>
-            Shop all
-          </Link>
-          <Link to="/shop" search={{ category: undefined, q: undefined }} onClick={() => setMenu(false)}>
+          <Link
+            to="/shop"
+            search={{ category: undefined, q: undefined }}
+            onClick={() => setMenu(false)}
+          >
             Collections
           </Link>
-          {(collections.data ?? []).slice(0, 2).map((collection) => (
-            <Link
-              key={collection.slug}
-              to="/shop"
-              search={{ category: collection.slug, q: undefined }}
-              onClick={() => setMenu(false)}
-            >
-              {collection.name}
-            </Link>
-          ))}
+
           <Link to="/about" onClick={() => setMenu(false)}>
             About
           </Link>
         </nav>
+
         <div className="header-actions">
-          <Link to="/shop" search={{ category: undefined, q: undefined }} className="header-search" aria-label="Search the collection">
+          <Link
+            to="/shop"
+            search={{ category: undefined, q: undefined }}
+            className="header-search"
+            aria-label="Search the collection"
+          >
             <Search size={17} />
             <span>Search</span>
           </Link>
+
           {isPending ? (
             <span className="header-account" aria-hidden>
               Account
@@ -72,6 +67,7 @@ export function Header() {
                   Account
                 </Link>
               </SignedOut>
+
               <SignedIn>
                 <span className="header-user">
                   <UserButton />
@@ -79,6 +75,7 @@ export function Header() {
               </SignedIn>
             </>
           )}
+
           <Link to="/cart" className="bag-link" data-testid="link-cart">
             <ShoppingBag size={18} strokeWidth={1.6} />
             <span>Bag ({count})</span>
@@ -103,19 +100,27 @@ export function Footer() {
             Made to be worn, often.
           </p>
         </div>
+
         <div className="footer-links">
           <div>
             <span>Explore</span>
-            <Link to="/shop" search={{ category: undefined, q: undefined }}>Shop all</Link>
+            <Link
+              to="/shop"
+              search={{ category: undefined, q: undefined }}
+            >
+              Shop all
+            </Link>
             <Link to="/about">About UV</Link>
             <Link to="/account">Your account</Link>
           </div>
+
           <div>
             <span>Need a hand?</span>
             <Link to="/contact">Contact</Link>
             <Link to="/shipping">Shipping</Link>
             <Link to="/returns">Returns</Link>
           </div>
+
           <div>
             <span>Information</span>
             <Link to="/privacy">Privacy</Link>
@@ -126,6 +131,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+
       <div className="footer-bottom">
         <span>© UV {new Date().getFullYear()}</span>
         <span>Designed for everyday, not just every day.</span>

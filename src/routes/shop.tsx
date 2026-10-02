@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight, ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
 import { Shell } from "@/components/store/layout";
 import { EmptyState, LoadingGrid, ProductCard, Status } from "@/components/store/ui";
-import { listCollections, listProducts } from "@/lib/store/catalog";
+import { listProducts } from "@/lib/store/catalog";
+import { SIKKU_DROPS } from "@/lib/store/sikku";
 import type { ProductSort } from "@/lib/store/types";
 
 export const Route = createFileRoute("/shop")({
@@ -66,13 +67,8 @@ function ShopPage() {
     queryFn: () => listProducts({ data: filters }),
     placeholderData: (previous) => previous,
   });
-  const collections = useQuery({ queryKey: ["collections"], queryFn: () => listCollections() });
-  const facets = useQuery({
-    queryKey: ["products", { page: 1, pageSize: 48 }],
-    queryFn: () => listProducts({ data: { page: 1, pageSize: 48 } }),
-  });
-  const availableSizes = [...new Set((facets.data?.items ?? []).flatMap((product) => product.sizes))].sort();
-  const availableColors = [...new Set((facets.data?.items ?? []).flatMap((product) => product.colors))].sort();
+  const availableSizes = ["S", "M", "L", "XL"];
+  const availableColors = ["Black", "Off-white"];
   const clearFilters = () => {
     setCategory("");
     setSearch("");
@@ -93,6 +89,50 @@ function ShopPage() {
           </h1>
           <p>Considered pieces. Everyday possibility.</p>
         </div>
+        <section className="sikku-browser" aria-labelledby="sikku-browser-title">
+          <div className="section-heading sikku-browser-heading">
+            <div>
+              <span className="eyebrow">THE COLLECTIONS</span>
+              <h2 id="sikku-browser-title">
+                Sikku <em>drops.</em>
+              </h2>
+            </div>
+            <span className="sikku-browser-note">Two drops. Eleven tees.</span>
+          </div>
+          <div className="sikku-drop-grid">
+            {SIKKU_DROPS.map((drop, index) => (
+              <Link
+                key={drop.slug}
+                className={`sikku-drop-card tone-${index}`}
+                to="/shop"
+                search={{ category: drop.slug, q: undefined }}
+              >
+                <div className="sikku-drop-art">
+                  {drop.image ? (
+                    <img src={drop.image} alt={`${drop.name} featured tee`} />
+                  ) : (
+                    <span>01</span>
+                  )}
+                </div>
+                <div className="sikku-drop-content">
+                  <div>
+                    <span className="eyebrow">{drop.eyebrow}</span>
+                    <h3>{drop.name}</h3>
+                    <p>{drop.summary}</p>
+                  </div>
+                  <div className="sikku-drop-footer">
+                    <span>{drop.productCount} pieces</span>
+                    <span>
+                      {drop.compareAtPrice ? <del>₹{drop.compareAtPrice}</del> : null}
+                      <strong>₹{drop.price}</strong>
+                      <ArrowRight size={14} />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
         <div className="catalog-toolbar">
           <span>{query.data?.total ?? "—"} pieces</span>
           <button className="filter-toggle" onClick={() => setMobileFilters(!mobileFilters)}>
@@ -141,14 +181,14 @@ function ShopPage() {
               <button className={!category ? "filter-option selected" : "filter-option"} onClick={() => setCategory("")}>
                 All pieces
               </button>
-              {(collections.data ?? []).map((c) => (
+              {SIKKU_DROPS.map((drop) => (
                 <button
-                  key={c.slug}
-                  className={category === c.slug ? "filter-option selected" : "filter-option"}
-                  onClick={() => setCategory(category === c.slug ? "" : c.slug)}
+                  key={drop.slug}
+                  className={category === drop.slug ? "filter-option selected" : "filter-option"}
+                  onClick={() => setCategory(category === drop.slug ? "" : drop.slug)}
                 >
-                  {c.name}
-                  <span>{c.productCount}</span>
+                  {drop.name}
+                  <span>{drop.productCount}</span>
                 </button>
               ))}
             </div>

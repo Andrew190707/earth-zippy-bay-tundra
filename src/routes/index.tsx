@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowDownRight, ArrowRight, CreditCard, ShieldCheck, Truck } from "lucide-react";
 import { Shell } from "@/components/store/layout";
 import { EmptyState, LoadingGrid, ProductCard, Status } from "@/components/store/ui";
-import { listCollections, listProducts } from "@/lib/store/catalog";
-import type { Collection } from "@/lib/store/types";
+import { listProducts } from "@/lib/store/catalog";
+import { SIKKU_DROPS } from "@/lib/store/sikku";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,10 +23,6 @@ function HomePage() {
   const products = useQuery({
     queryKey: ["products", { page: 1, pageSize: 4, sort: "featured" }],
     queryFn: () => listProducts({ data: { page: 1, pageSize: 4, sort: "featured" } }),
-  });
-  const collections = useQuery({
-    queryKey: ["collections"],
-    queryFn: () => listCollections(),
   });
 
   return (
@@ -84,30 +80,26 @@ function HomePage() {
               Shop all pieces <ArrowRight size={15} />
             </Link>
           </div>
-          {collections.isLoading ? (
-            <div className="collection-loading">Finding your way around…</div>
-          ) : collections.isError ? (
-            <Status error={collections.error} retry={() => collections.refetch()} />
-          ) : (
-            <div className="collection-row">
-              {(collections.data ?? []).slice(0, 3).map((c: Collection, i: number) => (
-                <Link
-                  className={`collection-tile tone-${i}`}
-                  key={c.slug}
-                  to="/shop"
-                  search={{ category: c.slug, q: undefined }}
-                >
-                  <div className="collection-art">{c.image ? <img src={c.image} alt={c.name} /> : <span>0{i + 1}</span>}</div>
-                  <div>
-                    <h3>{c.name}</h3>
-                    <span>
-                      {c.productCount} pieces <ArrowRight size={14} />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
+          <div className="collection-row">
+            {SIKKU_DROPS.map((drop, i) => (
+              <Link
+                className={`collection-tile tone-${i}`}
+                key={drop.slug}
+                to="/shop"
+                search={{ category: drop.slug, q: undefined }}
+              >
+                <div className="collection-art">
+                  {drop.image ? <img src={drop.image} alt={`${drop.name} featured tee`} /> : <span>0{i + 1}</span>}
+                </div>
+                <div>
+                  <h3>{drop.name}</h3>
+                  <span>
+                    {drop.productCount} pieces <ArrowRight size={14} />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </section>
         <section className="section-wrap new-arrivals">
           <div className="section-heading">
