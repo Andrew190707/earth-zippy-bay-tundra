@@ -1,0 +1,335 @@
+/* UV theme switcher
+   Light mode is the original storefront. Dark mode is the black + brown editorial theme.
+*/
+
+html {
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+html:not(.dark) {
+  color-scheme: light;
+  --background: 42 24% 95%;
+  --foreground: 30 9% 13%;
+  --border: 36 11% 84%;
+  --card: 42 24% 97%;
+  --card-foreground: 30 9% 13%;
+  --card-border: 36 11% 84%;
+  --popover: 42 24% 97%;
+  --popover-foreground: 30 9% 13%;
+  --popover-border: 36 11% 84%;
+  --primary: 30 9% 13%;
+  --primary-foreground: 42 24% 95%;
+  --secondary: 38 13% 89%;
+  --secondary-foreground: 30 9% 13%;
+  --muted: 38 13% 89%;
+  --muted-foreground: 27 7% 43%;
+  --accent: 16 30% 39%;
+  --accent-foreground: 42 24% 95%;
+  --input: 36 11% 78%;
+  --ring: 16 30% 39%;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background: #120f0d;
+  color: #eee9df;
+}
+
+.dark .site-header {
+  background: #120f0d;
+  border-color: #2b211c;
+}
+
+.dark .main-nav a,
+.dark .header-account,
+.dark .bag-link {
+  color: #eee9df;
+}
+
+.dark .announcement {
+  background: #0b0908;
+  color: #ddd5c9;
+}
+
+.dark .announcement span {
+  color: #a56f4d;
+}
+
+.dark .hero {
+  background: #17120f;
+}
+
+.dark .hero-shade {
+  background:
+    linear-gradient(90deg, rgba(8,7,6,.72) 0%, rgba(8,7,6,.32) 45%, rgba(8,7,6,.08) 78%),
+    linear-gradient(0deg, rgba(8,7,6,.38), transparent 30%);
+}
+
+.dark .editorial-intro,
+.dark .collection-band,
+.dark .new-arrivals,
+.dark .shop-page,
+.dark .product-detail,
+.dark .account-page,
+.dark .prose-page {
+  background: #120f0d;
+}
+
+.dark .eyebrow {
+  color: #a88c78;
+}
+
+.dark .section-heading h2 em,
+.dark .page-title h1 em {
+  color: #b17b59;
+}
+
+.dark .collection-band {
+  border-color: #2b211c;
+}
+
+.dark .collection-tile {
+  background: #1c1511;
+  border-color: #2b211c;
+}
+
+.dark .collection-tile.tone-1 {
+  background: #211812;
+}
+
+.dark .collection-tile.tone-2 {
+  background: #261b14;
+}
+
+.dark .collection-art {
+  opacity: .72;
+}
+
+.dark .collection-art img {
+  mix-blend-mode: normal;
+  opacity: .36;
+}
+
+.dark .product-photo,
+.dark .skeleton-image,
+.dark .catalog-results .product-photo,
+.dark .detail-image {
+  background: #1b1512;
+}
+
+.dark .image-placeholder {
+  background: linear-gradient(140deg, #211914, #17110e);
+  color: rgba(205,173,148,.34);
+}
+
+.dark .product-meta p,
+.dark .page-title p,
+.dark .intro-foot > span {
+  color: #9b8c80;
+}
+
+.dark .product-meta strong {
+  color: #eee9df;
+}
+
+.dark .product-meta strong del {
+  color: #806f62;
+}
+
+.dark .product-meta strong.product-sale-price,
+.dark .current-sale-price {
+  color: #c18b68;
+}
+
+.dark .product-flag {
+  background: rgba(20,15,12,.9);
+  color: #e9ded2;
+  border-color: #3b2a20;
+}
+
+.dark .quick-view {
+  background: rgba(19,15,12,.94);
+  color: #eee9df;
+  border-color: #3b2a20;
+}
+
+.dark .service-strip {
+  background: #0f0c0a;
+  border-color: #2b211c;
+}
+
+.dark .service-strip strong {
+  color: #e8dfd5;
+}
+
+.dark .service-strip > div {
+  color: #a18d7e;
+}
+
+.dark .manifesto {
+  background: #221812;
+}
+
+.dark .manifesto h2 em {
+  color: #c49a7b;
+}
+
+.dark .site-footer {
+  background: #0b0908;
+  color: #e8e0d6;
+}
+
+.dark .footer-top p,
+.dark .footer-links span,
+.dark .footer-bottom {
+  color: #988a7d;
+}
+
+.dark .footer-bottom {
+  border-color: #2b211c;
+}
+
+.dark .footer-links a:hover {
+  color: #c08a68;
+}
+
+.dark .filter-panel,
+.dark .catalog-toolbar,
+.dark .pagination,
+.dark .detail-description,
+.dark .choice-group,
+.dark .breadcrumbs {
+  color: #c9bdb1;
+}
+
+.dark .catalog-toolbar,
+.dark .pagination,
+.dark .filter-group,
+.dark .filter-head {
+  border-color: #2b211c;
+}
+
+.dark .search-control {
+  border-color: #3a2d24;
+}
+
+.dark .search-control input,
+.dark .sort-control select,
+.dark .filter-option,
+.dark .filter-input {
+  color: #e8e0d6;
+}
+
+.dark .filter-option.selected {
+  color: #fff7ed;
+}
+
+.dark .filter-input,
+.dark .field input,
+.dark .field textarea {
+  background: #191310;
+  border-color: #3a2d24;
+  color: #eee9df;
+}
+
+.dark .summary-card,
+.dark .checkout-summary,
+.dark .auth-card {
+  background: #17120f;
+  border-color: #34261e;
+}
+
+.dark .choice-label span,
+.dark .tiny,
+.dark .detail-description,
+.dark .filter-note {
+  color: #a18e7e;
+}
+
+.dark .size-chip {
+  color: #e8ded3;
+  border-color: #3b2d24;
+  background: #17120f;
+}
+
+.dark .size-chip.chosen {
+  border-color: #bd8763;
+  background: #3a2519;
+  color: #fff4e8;
+}
+
+.dark .theme-toggle {
+  color: #eee9df;
+  border-color: #3b2a20;
+  background: rgba(24,18,14,.7);
+}
+
+.dark .theme-toggle:hover {
+  background: #2b1e17;
+  border-color: #a56f4d;
+  color: #fff4e8;
+}
+
+html:not(.dark) .theme-toggle {
+  color: #302923;
+  border-color: #d5cec4;
+  background: rgba(255,255,255,.68);
+}
+
+html:not(.dark) .theme-toggle:hover {
+  color: #7b4d37;
+  border-color: #a77a61;
+  background: #fff;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid;
+  border-radius: 999px;
+  font: 9px/1 var(--app-font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.theme-toggle:active {
+  transform: translateY(1px);
+}
+
+.theme-toggle svg {
+  flex: 0 0 auto;
+}
+
+.dark .brand-logo {
+  filter: brightness(0) invert(1) opacity(.92);
+}
+
+@media (max-width: 850px) {
+  .theme-toggle span {
+    display: none;
+  }
+
+  .theme-toggle {
+    width: 34px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .dark .main-nav {
+    background: #120f0d;
+    border-color: #2b211c;
+  }
+}
