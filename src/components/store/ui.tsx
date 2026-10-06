@@ -12,6 +12,7 @@ export function imageSrc(url?: string | null) {
 
 const CATALOGUE_HERO_OVERRIDES: Record<string, string> = {
   "prd-sikku-godzilla-kolam": "/products/sikku-01/godzilla-05.jpg",
+  "prd-sikku-spidey-kolam": "/products/sikku-01/spidey-05.jpg",
 };
 
 export function ProductImage({
