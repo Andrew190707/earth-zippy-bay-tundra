@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, Search, ShoppingBag } from "lucide-react";
+import { Instagram, Menu, Search, ShoppingBag } from "lucide-react";
 import { SignedIn, SignedOut, UserButton } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { cartCount, useCart } from "@/lib/store/cart";
@@ -40,9 +40,6 @@ export function Header() {
             Collections
           </Link>
 
-          <Link to="/about" onClick={() => setMenu(false)}>
-            About
-          </Link>
         </nav>
 
         <div className="header-actions">
@@ -125,8 +122,8 @@ export function Footer() {
             <span>Information</span>
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms</Link>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">
-              Instagram ↗
+            <a className="instagram-link" href="https://instagram.com" target="_blank" rel="noreferrer">
+              <Instagram size={15} /> Brand page
             </a>
           </div>
         </div>

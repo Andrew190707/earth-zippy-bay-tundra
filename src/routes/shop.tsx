@@ -67,7 +67,7 @@ function ShopPage() {
     queryFn: () => listProducts({ data: filters }),
     placeholderData: (previous) => previous,
   });
-  const availableSizes = ["S", "M", "L", "XL"];
+  const availableSizes = ["M", "L", "XL", "XXL"];
   const availableColors = ["Black", "Off-white"];
   const clearFilters = () => {
     setCategory("");

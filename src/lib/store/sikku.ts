@@ -25,6 +25,7 @@ export const SIKKU_DROPS: SikkuDrop[] = [
       "Wolf Kolam Tee",
       "Skull Kolam Tee",
     ],
+    image: "/products/sikku-01/godzilla-01.jpg",
     price: 750,
   },
   {

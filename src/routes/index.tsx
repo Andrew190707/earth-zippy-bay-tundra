@@ -1,8 +1,9 @@
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowDownRight, ArrowRight, CreditCard, ShieldCheck, Truck } from "lucide-react";
 import { Shell } from "@/components/store/layout";
-import { EmptyState, LoadingGrid, ProductCard, Status } from "@/components/store/ui";
+import { EmptyState, LoadingGrid, ProductCard, ProductImage, Status } from "@/components/store/ui";
 import { listProducts } from "@/lib/store/catalog";
 import { SIKKU_DROPS } from "@/lib/store/sikku";
 
@@ -19,54 +20,111 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
+function BestSellerHero({ products }: { products: Array<Parameters<typeof ProductCard>[0]["product"]> }) {
+  const slides = useMemo(() => products.filter((product) => product.images?.length).slice(0, 5), [products]);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (slides.length < 2) return;
+    const timer = window.setInterval(() => setActive((current) => (current + 1) % slides.length), 5000);
+    return () => window.clearInterval(timer);
+  }, [slides.length]);
+
+  const product = slides[active];
+
+  return (
+    <section className="hero best-seller-hero">
+      {product ? (
+        <ProductImage
+          product={product}
+          className="hero-image"
+          alt={`${product.name} from UV`}
+        />
+      ) : (
+        <img
+          className="hero-image"
+          src="/products/sikku-02/spidey-ver2-01.jpg"
+          alt="UV Spidey Kolam Tee Ver 2 from Sikku Drop 02"
+        />
+      )}
+      <div className="hero-shade" />
+      <div className="hero-copy">
+        <span className="eyebrow light">THE EVERYDAY, RECONSIDERED — VOL. 01</span>
+        <h1>
+          Quietly
+          <br />
+          <em>distinct.</em>
+        </h1>
+        <p>Modern menswear for the hours that matter, and all the ones in between.</p>
+        <Link to="/shop" search={{ category: undefined, q: undefined }} className="button button-light">
+          Explore the collection <ArrowRight size={16} />
+        </Link>
+      </div>
+      <div className="hero-carousel">
+        <div className="hero-index">
+          <span>{slides.length ? `${String(active + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}` : "01 / 01"}</span>
+          <span>{product?.name ?? "SIKKU / SPIDEY VER 2"}</span>
+        </div>
+        {slides.length > 1 && (
+          <div className="hero-dots" aria-label="Best sellers">
+            {slides.map((slide, index) => (
+              <button
+                key={slide.id}
+                className={index === active ? "active" : ""}
+                onClick={() => setActive(index)}
+                aria-label={`Show ${slide.name}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function HomePage() {
   const products = useQuery({
-    queryKey: ["products", { page: 1, pageSize: 4, sort: "featured" }],
-    queryFn: () => listProducts({ data: { page: 1, pageSize: 4, sort: "featured" } }),
+    queryKey: ["products", { page: 1, pageSize: 8, sort: "featured" }],
+    queryFn: () => listProducts({ data: { page: 1, pageSize: 8, sort: "featured" } }),
   });
 
   return (
     <Shell>
       <main>
-        <section className="hero">
-          <img
-            className="hero-image"
-            src="/products/sikku-02/spidey-ver2-01.jpg"
-            alt="UV Spidey Kolam Tee Ver 2 from Sikku Drop 02"
-          />
-          <div className="hero-shade" />
-          <div className="hero-copy">
-            <span className="eyebrow light">THE EVERYDAY, RECONSIDERED — VOL. 01</span>
-            <h1>
-              Quietly
-              <br />
-              <em>distinct.</em>
-            </h1>
-            <p>Modern menswear for the hours that matter, and all the ones in between.</p>
-            <Link to="/shop" search={{ category: undefined, q: undefined }} className="button button-light">
-              Explore the collection <ArrowRight size={16} />
-            </Link>
-          </div>
-          <div className="hero-index">
-            <span>01 / 02</span>
-            <span>SIKKU / SPIDEY VER 2</span>
-          </div>
-        </section>
-        <section className="editorial-intro section-wrap">
-          <span className="eyebrow">A BETTER KIND OF BASIC</span>
-          <p>
-            Less, but with <span>more to say.</span>
-          </p>
-          <div className="intro-foot">
-            <span>
-              Designed in restraint.
-              <br />
-              Made for the real world.
-            </span>
+        <BestSellerHero products={products.data?.items ?? []} />
+        <section className="section-wrap new-arrivals home-best-sellers">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">FIRST LOOK</span>
+              <h2>
+                In good <em>company.</em>
+              </h2>
+            </div>
             <Link to="/shop" search={{ category: undefined, q: undefined }} className="text-link">
-              Discover UV <ArrowDownRight size={15} />
+              View the collection <ArrowRight size={15} />
             </Link>
           </div>
+          {products.isLoading ? (
+            <LoadingGrid />
+          ) : products.isError ? (
+            <Status error={products.error} retry={() => products.refetch()} />
+          ) : products.data?.items.length ? (
+            <div className="product-grid">
+              {products.data.items.slice(0, 4).map((p) => (
+                <ProductCard product={p} key={p.id} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              title="The next collection is on its way."
+              copy="There's nothing on the rail just yet. Check back soon."
+              action={
+                <Link to="/shop" search={{ category: undefined, q: undefined }} className="text-link">
+                  Browse the shop <ArrowRight size={15} />
+                </Link>
+              }
+            />
+          )}
         </section>
         <section className="section-wrap collection-band">
           <div className="section-heading">
@@ -101,39 +159,25 @@ function HomePage() {
             ))}
           </div>
         </section>
-        <section className="section-wrap new-arrivals">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">FIRST LOOK</span>
-              <h2>
-                In good <em>company.</em>
-              </h2>
-            </div>
+        <section className="editorial-intro section-wrap">
+          <span className="eyebrow">LESS, BUT WITH MORE TO SAY</span>
+          <p>
+            Less, but with <span>more to say.</span>
+          </p>
+          <div className="intro-foot">
+            <span>
+              About UV.
+              <br />
+              Considered tees, made for repeat wear.
+            </span>
+            <span className="intro-detail">
+              Sikku is a graphic-led tee collection built around expressive kolam-inspired artwork,
+              everyday silhouettes and a deliberately restrained palette.
+            </span>
             <Link to="/shop" search={{ category: undefined, q: undefined }} className="text-link">
-              View the collection <ArrowRight size={15} />
+              Discover the tees <ArrowDownRight size={15} />
             </Link>
           </div>
-          {products.isLoading ? (
-            <LoadingGrid />
-          ) : products.isError ? (
-            <Status error={products.error} retry={() => products.refetch()} />
-          ) : products.data?.items.length ? (
-            <div className="product-grid">
-              {products.data.items.map((p) => (
-                <ProductCard product={p} key={p.id} />
-              ))}
-            </div>
-          ) : (
-            <EmptyState
-              title="The next collection is on its way."
-              copy="There's nothing on the rail just yet. Check back soon."
-              action={
-                <Link to="/shop" search={{ category: undefined, q: undefined }} className="text-link">
-                  Browse the shop <ArrowRight size={15} />
-                </Link>
-              }
-            />
-          )}
         </section>
         <section className="manifesto">
           <span className="eyebrow light">A NOTE ON CLOTHES</span>
