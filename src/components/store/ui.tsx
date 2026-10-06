@@ -10,6 +10,10 @@ export function imageSrc(url?: string | null) {
   return `/${url.replace(/^\//, "")}`;
 }
 
+const CATALOGUE_HERO_OVERRIDES: Record<string, string> = {
+  "prd-sikku-godzilla-kolam": "/products/sikku-01/godzilla-05.jpg",
+};
+
 export function ProductImage({
   product,
   className = "",
@@ -89,7 +93,7 @@ export function ProductCard({ product }: { product: Product }) {
       data-testid={`card-product-${product.id}`}
     >
       <div className="product-photo">
-        <ProductImage product={product} className="product-image" />
+        <ProductImage product={product} src={CATALOGUE_HERO_OVERRIDES[product.id]} className="product-image" />
         {(product.newArrival || product.featured) && (
           <span className="product-flag">{product.newArrival ? "NEW ARRIVAL" : "UV SELECT"}</span>
         )}
