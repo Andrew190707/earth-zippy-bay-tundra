@@ -1,20 +1,36 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { Instagram, Menu, Search, ShoppingBag } from "lucide-react";
+import { Instagram, Menu, Moon, Search, ShoppingBag, Sun } from "lucide-react";
 import { SignedIn, SignedOut, UserButton } from "@/lib/auth/gates";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { cartCount, useCart } from "@/lib/store/cart";
+import "@/styles/theme-toggle.css";
 
-export function Header() {
+function Header() {
   const [menu, setMenu] = useState(false);
+  const [dark, setDark] = useState(false);
   const items = useCart((s) => s.items);
   const count = cartCount(items);
   const { isPending } = useCurrentUserState();
 
+  useEffect(() => {
+    const saved = window.localStorage.getItem("uv-theme");
+    const shouldUseDark = saved === "dark";
+    setDark(shouldUseDark);
+    document.documentElement.classList.toggle("dark", shouldUseDark);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    window.localStorage.setItem("uv-theme", next ? "dark" : "light");
+  };
+
   return (
     <>
       <div className="announcement">
-        Complimentary shipping on orders over ₹2,500 <span>—</span> Made for the long way around.
+        Complimentary shipping on orders over ₹2,500 <span>•</span> Made for the long way around.
       </div>
       <header className="site-header">
         <button
@@ -39,7 +55,6 @@ export function Header() {
           >
             Collections
           </Link>
-
         </nav>
 
         <div className="header-actions">
@@ -53,8 +68,21 @@ export function Header() {
             <span>Search</span>
           </Link>
 
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+            aria-pressed={dark}
+            title={dark ? "Light theme" : "Dark theme"}
+            data-testid="button-theme-toggle"
+          >
+            {dark ? <Sun size={16} strokeWidth={1.7} /> : <Moon size={16} strokeWidth={1.7} />}
+            <span>{dark ? "Light" : "Dark"}</span>
+          </button>
+
           {isPending ? (
-            <span className="header-account" aria-hidden>
+            <span className="header-account" aria-hidden="true">
               Account
             </span>
           ) : (
@@ -64,7 +92,6 @@ export function Header() {
                   Account
                 </Link>
               </SignedOut>
-
               <SignedIn>
                 <span className="header-user">
                   <UserButton />
@@ -122,7 +149,12 @@ export function Footer() {
             <span>Information</span>
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms</Link>
-            <a className="instagram-link" href="https://instagram.com" target="_blank" rel="noreferrer">
+            <a
+              className="instagram-link"
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Instagram size={15} /> Brand page
             </a>
           </div>
