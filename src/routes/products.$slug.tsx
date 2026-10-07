@@ -78,6 +78,14 @@ function ProductPage() {
         { url: "/products/sikku-01/kaali-03.jpg", alt: "Kaali Kolam Tee detail" },
         { url: "/products/sikku-01/kaali-04.jpg", alt: "Kaali Kolam Tee detail" },
       ]
+    : p.name === "Skull Kolam Tee"
+    ? [
+        { url: "/products/sikku-01/skull-main.jpg", alt: "Skull Kolam Tee product photo" },
+        { url: "/products/sikku-01/skull-01.jpg", alt: "Skull Kolam Tee detail" },
+        { url: "/products/sikku-01/skull-02.jpg", alt: "Skull Kolam Tee detail" },
+        { url: "/products/sikku-01/skull-03.jpg", alt: "Skull Kolam Tee detail" },
+        { url: "/products/sikku-01/skull-05.jpg", alt: "Skull Kolam Tee detail" },
+      ]
     : p.images;
   const canBuy = p.stock > 0 && !!size && !!color;
 
