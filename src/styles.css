@@ -39,10 +39,9 @@ html { scroll-behavior: smooth; }
 
 /* UV editorial: architecture, whitespace, and low-key motion */
 .announcement { height: 32px; display: flex; align-items: center; overflow: hidden; background: #282723; color: #f3f0e9; font: 9px var(--app-font-mono); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
-.announcement-track { display: flex; width: max-content; flex-shrink: 0; animation: announcement-scroll 28s linear infinite; will-change: transform; }
-.announcement-track span { display: block; flex-shrink: 0; padding-right: 64px; }
-.announcement-track span::after { content: ""; }
-@keyframes announcement-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.announcement-track { display: flex; width: max-content; flex: 0 0 max-content; animation: announcement-scroll 18s linear infinite; animation-play-state: running; will-change: transform; }
+.announcement-track span { display: block; flex: 0 0 auto; padding-right: 64px; }
+@keyframes announcement-scroll { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
 .site-header { height: 76px; padding: 0 5.2vw; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; border-bottom: 1px solid hsl(var(--border)); background: hsl(var(--background)); position: relative; z-index: 5; }
 .wordmark { display: inline-flex; align-items: center; width: max-content; text-decoration: none; color: inherit; line-height: 1; }
 .brand-logo { display: block; width: 62px; height: auto; object-fit: contain; }
