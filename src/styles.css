@@ -407,3 +407,5 @@ h1,h2,h3,p { margin-top: 0; }
   .intro-foot { align-items: flex-start; flex-direction: column; gap: 20px; }
   .intro-detail { max-width: 100%; }
 }
+/* The UV announcement marquee is intentionally always animated. */
+.announcement-track { animation: announcement-scroll 18s linear infinite !important; animation-play-state: running !important; }
