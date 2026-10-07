@@ -33,6 +33,8 @@ function Header() {
         <div className="announcement-track">
           <span>LIMITED DROP • PREMIUM 240 GSM OVERSIZED TEES • BUILT TO STAND OUT • SHOP THE LATEST DROP ↓</span>
           <span aria-hidden="true">LIMITED DROP • PREMIUM 240 GSM OVERSIZED TEES • BUILT TO STAND OUT • SHOP THE LATEST DROP ↓</span>
+          <span aria-hidden="true">LIMITED DROP • PREMIUM 240 GSM OVERSIZED TEES • BUILT TO STAND OUT • SHOP THE LATEST DROP ↓</span>
+          <span aria-hidden="true">LIMITED DROP • PREMIUM 240 GSM OVERSIZED TEES • BUILT TO STAND OUT • SHOP THE LATEST DROP ↓</span>
         </div>
       </div>
       <header className="site-header">
