@@ -11,7 +11,7 @@ import { money } from "@/lib/store/money";
 export const Route = createFileRoute("/products/$slug")({
   head: ({ params }) => ({
     meta: [
-      { title: `${params.slug.replace(/-/g, " ")} — UV` },
+      { title: `${params.slug.replace(/-/g, " ")} â UV` },
       { name: "description", content: `Shop ${params.slug.replace(/-/g, " ")} from UV's considered menswear collection.` },
     ],
   }),
@@ -69,6 +69,16 @@ function ProductPage() {
     );
   }
   const p = product.data;
+  // Keep the Kaali gallery deterministic while older production databases catch up with the gallery migration.
+  const displayImages = p.name === "Kaali Kolam Tee"
+    ? [
+        { url: "/products/sikku-01/kaali-main.jpg", alt: "Kaali Kolam Tee product photo" },
+        { url: "/products/sikku-01/kaali-01.jpg", alt: "Kaali Kolam Tee detail" },
+        { url: "/products/sikku-01/kaali-02.jpg", alt: "Kaali Kolam Tee detail" },
+        { url: "/products/sikku-01/kaali-03.jpg", alt: "Kaali Kolam Tee detail" },
+        { url: "/products/sikku-01/kaali-04.jpg", alt: "Kaali Kolam Tee detail" },
+      ]
+    : p.images;
   const canBuy = p.stock > 0 && !!size && !!color;
 
   return (
@@ -83,7 +93,7 @@ function ProductPage() {
               name: p.name,
               description: p.description,
               sku: p.sku,
-              image: p.images.map((im) => im.url),
+              image: displayImages.map((im) => im.url),
               brand: { "@type": "Brand", name: "UV" },
               offers: {
                 "@type": "Offer",
@@ -103,8 +113,8 @@ function ProductPage() {
         </div>
         <div className="detail-grid">
           <div className="detail-gallery">
-            {p.images.length ? (
-              p.images.map((im, i) => (
+            {displayImages.length ? (
+              displayImages.map((im, i) => (
                 <img
                   key={`${im.url}-${i}`}
                   src={imageSrc(im.url)}
@@ -218,7 +228,7 @@ function ProductPage() {
             {p.stock > 0 && p.stock <= 5 && <p className="stock-message">Only {p.stock} left in this colour</p>}
             <div className="product-perks">
               <p>
-                <Truck size={17} /> Complimentary shipping over ₹2,500
+                <Truck size={17} /> Complimentary shipping over â¹2,500
               </p>
               <p>
                 <ShieldCheck size={17} /> Easy 7-day returns
