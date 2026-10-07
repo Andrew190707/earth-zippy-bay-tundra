@@ -159,7 +159,11 @@ function HomePage() {
             ))}
           </div>
         </section>
-        <section className="fabric-specs section-wrap">
+        <section className="editorial-intro fabric-specs section-wrap">
+          <span className="eyebrow">LESS, BUT WITH MORE TO SAY</span>
+          <p className="fabric-catchphrase">
+            Less, but with <span>more to say.</span>
+          </p>
           <span className="eyebrow">THE UV STANDARD</span>
           <h2>240 GSM IMPORTED FRENCH TERRY COTTON</h2>
           <p className="fabric-lead">
@@ -188,20 +192,7 @@ function HomePage() {
                 instructions are followed.
               </p>
 
-              <span className="fabric-label">CARE INSTRUCTIONS</span>
-              <p>To keep your UV piece looking fresh:</p>
-              <ul>
-                <li>Machine wash inside out</li>
-                <li>Use cold water or a gentle cycle</li>
-                <li>Use a mild detergent</li>
-                <li>Do not bleach</li>
-                <li>Do not scrub or directly iron the printed area</li>
-                <li>Do not tumble dry at high heat</li>
-                <li>Hang dry or dry in shade whenever possible</li>
-                <li>If ironing is necessary, iron inside out on low heat</li>
-              </ul>
 
-              <p className="fabric-tip"><strong>Pro Tip:</strong> Treat the print gently and your UV piece will stay cleaner for longer.</p>
             </div>
           </div>
         </section>
