@@ -20,36 +20,34 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-function BestSellerHero({ products }: { products: Array<Parameters<typeof ProductCard>[0]["product"]> }) {
-  const slides = useMemo(() => products.filter((product) => product.images?.length).slice(0, 5), [products]);
+const HOME_HERO_IMAGES = [
+  "/hero/hero-01.jpg",
+  "/hero/hero-02.jpg",
+  "/hero/hero-03.jpg",
+  "/hero/hero-04.jpg",
+];
+
+function BestSellerHero() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    if (slides.length < 2) return;
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % slides.length), 5000);
+    const timer = window.setInterval(
+      () => setActive((current) => (current + 1) % HOME_HERO_IMAGES.length),
+      5000,
+    );
     return () => window.clearInterval(timer);
-  }, [slides.length]);
-
-  const product = slides[active];
+  }, []);
 
   return (
     <section className="hero best-seller-hero">
-      {product ? (
-        <ProductImage
-          product={product}
-          className="hero-image"
-          alt={`${product.name} from UV`}
-        />
-      ) : (
-        <img
-          className="hero-image"
-          src="/products/sikku-02/spidey-ver2-01.jpg"
-          alt="UV Spidey Kolam Tee Ver 2 from Sikku Drop 02"
-        />
-      )}
+      <img
+        className="hero-image"
+        src={HOME_HERO_IMAGES[active]}
+        alt={"UV hero " + (active + 1)}
+      />
       <div className="hero-shade" />
       <div className="hero-copy">
-        <span className="eyebrow light">THE EVERYDAY, RECONSIDERED — VOL. 01</span>
+        <span className="eyebrow light">THE EVERYDAY, RECONSIDERED · VOL. 01</span>
         <h1>
           Quietly
           <br />
@@ -62,21 +60,18 @@ function BestSellerHero({ products }: { products: Array<Parameters<typeof Produc
       </div>
       <div className="hero-carousel">
         <div className="hero-index">
-          <span>{slides.length ? `${String(active + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}` : "01 / 01"}</span>
-          <span>{product?.name ?? "SIKKU / SPIDEY VER 2"}</span>
+          <span>{String(active + 1).padStart(2, "0")} / {String(HOME_HERO_IMAGES.length).padStart(2, "0")}</span>
         </div>
-        {slides.length > 1 && (
-          <div className="hero-dots" aria-label="Best sellers">
-            {slides.map((slide, index) => (
-              <button
-                key={slide.id}
-                className={index === active ? "active" : ""}
-                onClick={() => setActive(index)}
-                aria-label={`Show ${slide.name}`}
-              />
-            ))}
-          </div>
-        )}
+        <div className="hero-dots" aria-label="Homepage hero images">
+          {HOME_HERO_IMAGES.map((_, index) => (
+            <button
+              key={index}
+              className={index === active ? "active" : ""}
+              onClick={() => setActive(index)}
+              aria-label={"Show hero image " + (index + 1)}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -91,7 +86,7 @@ function HomePage() {
   return (
     <Shell>
       <main>
-        <BestSellerHero products={products.data?.items ?? []} />
+        <BestSellerHero />
         <section className="section-wrap new-arrivals home-best-sellers">
           <div className="section-heading">
             <div>
