@@ -24,7 +24,7 @@ const HOME_HERO_IMAGES = [
   "/hero/hero-01.jpg",
   "/hero/hero-02.jpg",
   "/hero/hero-03.jpg",
-  "/hero/hero-04.jpg",
+  "/products/sikku-01/kaali-main.jpg",
 ];
 
 function BestSellerHero() {
