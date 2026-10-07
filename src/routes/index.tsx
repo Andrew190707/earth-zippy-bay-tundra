@@ -159,24 +159,50 @@ function HomePage() {
             ))}
           </div>
         </section>
-        <section className="editorial-intro section-wrap">
-          <span className="eyebrow">LESS, BUT WITH MORE TO SAY</span>
-          <p>
-            Less, but with <span>more to say.</span>
+        <section className="fabric-specs section-wrap">
+          <span className="eyebrow">THE UV STANDARD</span>
+          <h2>240 GSM IMPORTED FRENCH TERRY COTTON</h2>
+          <p className="fabric-lead">
+            Built for weight, structure, and everyday comfort.
           </p>
-          <div className="intro-foot">
-            <span>
-              About UV.
-              <br />
-              Considered tees, made for repeat wear.
-            </span>
-            <span className="intro-detail">
-              Sikku is a graphic-led tee collection built around expressive kolam-inspired artwork,
-              everyday silhouettes and a deliberately restrained palette.
-            </span>
-            <Link to="/shop" search={{ category: undefined, q: undefined }} className="text-link">
-              Discover the tees <ArrowDownRight size={15} />
-            </Link>
+
+          <div className="fabric-grid">
+            <div className="fabric-column">
+              <span className="fabric-label">FABRIC &amp; CONSTRUCTION</span>
+              <ul>
+                <li><strong>Fabric:</strong> 240 GSM French Terry Cotton</li>
+                <li><strong>Fabric Origin:</strong> Imported — sourced from Taiwan, China &amp; USA</li>
+                <li><strong>Fit:</strong> Premium Oversized Fit</li>
+                <li><strong>Print:</strong> High-quality DTF (Direct-to-Film) print</li>
+                <li><strong>Print Durability:</strong> Up to 100 washes guaranteed when care instructions are followed</li>
+                <li><strong>Feel:</strong> Soft, structured, breathable, and heavyweight</li>
+                <li><strong>Construction:</strong> Made for long-lasting shape and everyday wear</li>
+              </ul>
+            </div>
+
+            <div className="fabric-column">
+              <span className="fabric-label">PRINT GUARANTEE</span>
+              <p>
+                Our DTF prints are designed to withstand up to 100 washes without significant
+                cracking, peeling, or loss of print quality, provided the recommended care
+                instructions are followed.
+              </p>
+
+              <span className="fabric-label">CARE INSTRUCTIONS</span>
+              <p>To keep your UV piece looking fresh:</p>
+              <ul>
+                <li>Machine wash inside out</li>
+                <li>Use cold water or a gentle cycle</li>
+                <li>Use a mild detergent</li>
+                <li>Do not bleach</li>
+                <li>Do not scrub or directly iron the printed area</li>
+                <li>Do not tumble dry at high heat</li>
+                <li>Hang dry or dry in shade whenever possible</li>
+                <li>If ironing is necessary, iron inside out on low heat</li>
+              </ul>
+
+              <p className="fabric-tip"><strong>Pro Tip:</strong> Treat the print gently and your UV piece will stay cleaner for longer.</p>
+            </div>
           </div>
         </section>
         <section className="manifesto">
