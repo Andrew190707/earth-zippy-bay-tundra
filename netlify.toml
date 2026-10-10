@@ -1,0 +1,5 @@
+# Netlify-only build config for the isolated preview.
+# The build script intentionally skips production database migrations.
+[build]
+  command = "npm run build:netlify"
+  publish = "dist"
