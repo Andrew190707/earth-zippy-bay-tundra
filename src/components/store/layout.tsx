@@ -156,7 +156,7 @@ export function Footer() {
             <Link to="/terms">Terms</Link>
             <a
               className="instagram-link"
-              href="https://instagram.com"
+              href="https://www.instagram.com/uv_clo"
               target="_blank"
               rel="noreferrer"
             >
